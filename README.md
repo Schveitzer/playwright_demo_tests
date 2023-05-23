@@ -67,6 +67,8 @@ $ pytest -vv --headed --browser firefox --alluredir=results/allure_report
 $ pytest -vv --headed --browser chrome --slowmo 500 --alluredir=results/allure_report
 ```
 
+![Test Execution](img/test_execution.gif)
+
 ## Tests with multiple browser instances (Contexts) and multiple pages
 With playwright all tests is isolated with contexts and pages, in this project all the browser contexts are defined as 
 fixtures, in file conftest.py is possible change and create new contexts. 
