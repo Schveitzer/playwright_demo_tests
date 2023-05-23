@@ -69,7 +69,7 @@ $ pytest -vv --headed --browser chrome --slowmo 500 --alluredir=results/allure_r
 
 ![Test Execution](img/test_execution.gif)
 
-## Tests with multiple browser instances (Contexts) and multiple pages
+## Tests with multiple browser instances (contexts) and multiple pages
 With playwright all tests is isolated with contexts and pages, in this project all the browser contexts are defined as 
 fixtures, in file conftest.py is possible change and create new contexts. 
 
@@ -99,6 +99,25 @@ def context_standard_user(browser: Browser, **browser_context_args):
     yield context
     context.close()
 ```
+
+Example of test with multiple contexts and pages:
+```python
+#test_playwright_demo.py
+
+from playwright.sync_api import expect
+
+def test_with_multiple_context_and_pages_authenticated(self, context_problem_user, context_standard_user):
+      self.page_one = context_standard_user.new_page()
+      self.page_one.goto("https://www.saucedemo.com/inventory.html")
+      self.logo_one = self.page_one.locator(".app_logo")
+      self.page_two = context_problem_user.new_page()
+      self.page_two.goto("https://www.saucedemo.com/inventory.html")
+      self.logo_two = self.page_two.locator(".app_logo")
+      expect(self.logo_one).to_have_text("Swag Labs")
+      expect(self.logo_two).to_have_text("Swag Labs")
+```
+
+
 ## Intercepting page requests (Network Events)
 Playwright provides APIs to monitor and modify network traffic, both HTTP and HTTPS. Any requests that a page does, 
 including XHRs and fetch requests, can be tracked, modified and handled.
