@@ -78,7 +78,7 @@ word "context_" at the beginning of the name, if the context is created without 
 trace files will not be automatically saved in case of failure.
 
 > Inside conftest.py there is a login function that will authenticate using the users from the 
-> fixtures/users.json file, for each user teh function save the authenticated state
+> fixtures/users.json file, for each user the function save a authenticated state file
 
 > If login fails, the test suite is aborted
 
